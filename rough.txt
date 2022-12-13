@@ -1,0 +1,2 @@
+PS C:\Users\prakhar.chanauria\Documents\10. Non-EI Projects\Quick EI Analyzer\JIRA-Similar-Issue-Finder-App> C:\Python310-x64\python.exe .\app_cli.py related-ticket-finder comment-related-tickets --test-model model_project1_closed_tickets_13_12_2022_2_13_27.pickle --open-tickets-filter "project = EI AND key in (EI-32705)"
+PS C:\Users\prakhar.chanauria\Documents\10. Non-EI Projects\Quick EI Analyzer\JIRA-Similar-Issue-Finder-App> C:\Python310-x64\python.exe .\app_cli.py related-ticket-finder train-related-tickets-model

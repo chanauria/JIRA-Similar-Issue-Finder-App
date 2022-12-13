@@ -29,7 +29,10 @@ def train_related_tickets_model():
         jira_obj = scraper.connect_to_jira()
 
         # read jql filters config
+        #jql_filters = {'FILTER_COMPLETED_TICKETS_FOR_TRAINING': ['f1', 'p1']}
         filter_to_get_completed_tickets_for_training = dict(jql_filters['FILTER_COMPLETED_TICKETS_FOR_TRAINING'])
+        #print('filter_to_get_completed_tickets_for_training', filter_to_get_completed_tickets_for_training)
+        #filter_to_get_completed_tickets_for_training = 'project = EI AND (Team in ("SSDE: DSS", "SSDE: EIP", "SSDE: Endpoint", "CASB", "Dynamic User Protection", "Data Loss Prevention (DLP)", "Dynamic User Protection (DUP)")) AND status not in (closed, Resolved) ORDER BY created DESC'
 
         # for each filter, train and save a model
         for filter_name, filter_query in filter_to_get_completed_tickets_for_training.items():
@@ -68,6 +71,8 @@ def comment_related_tickets(test_model, open_tickets_filter):
         for filter_name, filter_query in filter_to_use.items():
             # crawl and get tickets info for this filter
             jira_tickets_corpus = scraper.filter_crawler(jira_obj, filter_query)
+            print('jira_tickets_corpus', jira_tickets_corpus)
+
 
             # get info about tickets in which related tickets have already been commented
             already_commented_tickets_file = os.path.join(os.path.join(THIS_MODULE_DIRECTORY,'data'),
@@ -94,9 +99,9 @@ def comment_related_tickets(test_model, open_tickets_filter):
             # for each ticket, comment the top N related tickets to it
             for ticket in related_tickets_data:
                 logger.logger.info("Ticket:" + ticket['jiraid'] + "| Related tickets:" + str(ticket['related_tickets']))
-                scraper.comment_on_task(jira_obj, ticket['jiraid'], related_tickets_pkg_util.get_formatted_comment(
-                    ticket['related_tickets']))
-                tickets_already_commented.append(ticket['jiraid'])
+                # scraper.comment_on_task(jira_obj, ticket['jiraid'], related_tickets_pkg_util.get_formatted_comment(
+                #     ticket['related_tickets']))
+                # tickets_already_commented.append(ticket['jiraid'])
 
             # update the already commented list file
             logger.logger.info(tickets_already_commented)

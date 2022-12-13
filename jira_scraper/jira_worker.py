@@ -75,6 +75,7 @@ def get_assignee_email(jira_issue_object):
 def filter_crawler(authed_jira, jira_filter, include_comments=False):
     logger.logger.debug("Crawling the filter - " + jira_filter)
     filter_tickets = authed_jira.search_issues(jira_filter, maxResults=maxResultsToReturn)
+    #filter_tickets = authed_jira.search_issues(jira_filter, maxResults=10)
     tickets_corpus = []
     if filter_tickets:
         logger.logger.info("Total tickets to crawl : "+str(len(filter_tickets)))
@@ -98,10 +99,10 @@ def filter_crawler(authed_jira, jira_filter, include_comments=False):
     logger.logger.debug("Ticket corpus - " + str(tickets_corpus))
     return tickets_corpus
 
-def comment_on_task(authed_jira,jira_id,comment):
-    logger.logger.debug("Commenting - " + str(comment) + " on ", jira_id)
-    try:
-        authed_jira.add_comment(jira_id,comment)
-    except Exception as e:
-        logger.logger.exception(e)
-        logger.sentry_client.captureException()
+# def comment_on_task(authed_jira,jira_id,comment):
+#     logger.logger.debug("Commenting - " + str(comment) + " on ", jira_id)
+#     try:
+#         authed_jira.add_comment(jira_id,comment)
+#     except Exception as e:
+#         logger.logger.exception(e)
+#         logger.sentry_client.captureException()

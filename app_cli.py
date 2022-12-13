@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 import jira_template_commentor.commands as jira_template_commentor
 import related_tickets_finder.commands as related_ticket_finder_commands
-import mailer.commands as mailer_commands
+#import mailer.commands as mailer_commands
 
 __author__ = "Bhavul Gauri"
 
@@ -43,8 +43,8 @@ related_ticket_finder.add_command(related_ticket_finder_commands.train_related_t
 related_ticket_finder.add_command(related_ticket_finder_commands.comment_related_tickets)
 related_ticket_finder.add_command(related_ticket_finder_commands.get_data)
 jira_scraper_commentor.add_command(jira_template_commentor.post_template_comment_on_new_tickets)
-mailer.add_command(mailer_commands.send_mail_of_shame)
-mailer.add_command(mailer_commands.send_weekly_analysis_mail)
+#mailer.add_command(mailer_commands.send_mail_of_shame)
+#mailer.add_command(mailer_commands.send_weekly_analysis_mail)
 
 if __name__ == "__main__":
     cli()
